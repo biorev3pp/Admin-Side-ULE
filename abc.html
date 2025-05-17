@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="images/ule 360 logo.png" />
+
+    <title>Admin Side Documentation</title>
+    <style>
+      :root {
+        --font-family: "Roboto", Arial, sans-serif;
+        --bg-color: #ffffff;
+        --text-color: #000000;
+        --sidebar-bg: #2c3e50;
+        --sidebar-text: #ecf0f1;
+        --sidebar-hover: #34495e;
+        --sidebar-active: #3498db;
+        --link-color: #333;
+        --link-hover: #ddd;
+        --active-link-bg: #2c3e50;
+        --active-link-color: white;
+        --step-bg: #f9f9f9;
+        --step-border: #3498db;
+      }
+
+      [data-theme="dark"] {
+        --bg-color: #121212;
+        --text-color: #ffffff;
+        --sidebar-bg: #1e1e1e;
+        --sidebar-text: #cccccc;
+        --sidebar-hover: #333;
+        --sidebar-active: #3498db;
+        --link-color: #cccccc;
+        --link-hover: #333;
+        --active-link-bg: #3498db;
+        --active-link-color: #fff;
+        --step-bg: #1f1f1f;
+        --step-border: #3498db;
+      }
+
+      .theme-switch-wrapper {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1100;
+      }
+
+      .theme-switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+
+      .theme-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+
+      /* Checked state (Dark Mode) */
+      input:checked + .slider {
+        background-color: #2196F3;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px; /* adjust based on your fixed header height */
+      }
+      
+      body {
+        font-family: var(--font-family);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        transition: background-color 0.3s, color 0.3s;
+      }
+      
+      .logo {
+        display: block;
+        max-width: 150px;
+        height: auto;
+        margin: 0 auto 20px auto;
+      }
+
+      /* Sidebar styling */
+      #sidebar {
+        width: 250px;
+        background-color: var(--sidebar-bg);
+        color: var(--sidebar-text);
+        height: 100vh;
+        position: fixed;
+        overflow-y: auto;
+        padding: 20px 0;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        transition: transform 0.3s ease, background-color 0.3s;
+      }
+
+      #sidebar h2 {
+        padding: 0 20px;
+        margin-bottom: 20px;
+        color: var(--sidebar-text);
+        margin-top: 30px;
+      }
+
+      #sidebar ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      #sidebar li {
+        padding: 10px 20px;
+        border-left: 4px solid transparent;
+        transition: all 0.3s;
+      }
+
+      #sidebar li a {
+        color: var(--sidebar-text);
+        text-decoration: none;
+        display: block;
+      }
+
+      #sidebar li:hover {
+        background-color: var(--sidebar-hover);
+        border-left: 4px solid var(--sidebar-active);
+      }
+
+      #sidebar li.active {
+        background-color: var(--sidebar-hover);
+        border-left: 4px solid var(--sidebar-active);
+      }
+
+      /* Main content styling */
+      #content {
+        margin-left: 250px;
+        padding: 30px;
+        flex: 1;
+        background-color: var(--bg-color);
+        transition: background-color 0.3s;
+      }
+
+      h1 {
+        color: var(--text-color);
+        margin-bottom: 20px;
+        font-size: 28px;
+      }
+
+      h2 {
+        color: var(--text-color);
+        margin: 25px 0 15px;
+        font-size: 24px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--link-hover);
+      }
+
+      h3 {
+        color: var(--text-color);
+        margin: 20px 0 12px;
+        font-size: 20px;
+      }
+
+      h4 {
+        color: var(--text-color);
+        margin: 15px 0 10px;
+        font-size: 16px;
+      }
+
+      p {
+        margin: 10px 0;
+        color: var(--text-color);
+      }
+
+      .section {
+        margin-bottom: 30px;
+      }
+
+      .steps {
+        margin: 15px 0;
+        padding: 15px;
+        background-color: var(--step-bg);
+        border-radius: 4px;
+        border-left: 3px solid var(--step-border);
+        transition: background-color 0.3s;
+      }
+
+      .steps ol,
+      .steps ul {
+        padding-left: 25px;
+        margin: 10px 0;
+      }
+
+      .steps li {
+        margin-bottom: 8px;
+        color: var(--text-color);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid var(--link-hover);
+      }
+
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+      }
+
+      th {
+        background-color: var(--step-bg);
+      }
+
+      .note {
+        background-color: var(--step-bg);
+        padding: 12px;
+        border-left: 4px solid var(--step-border);
+        margin: 15px 0;
+        border-radius: 4px;
+      }
+
+      hr {
+        border: 0;
+        height: 1px;
+        background: var(--link-hover);
+        margin: 20px 0;
+      }
+
+      strong {
+        font-weight: 600;
+      }
+
+      ul,
+      ol {
+        margin: 10px 0;
+        padding-left: 25px;
+      }
+
+      li {
+        margin-bottom: 6px;
+        color: var(--text-color);
+      }
+      
+      img {
+        width: 60%;
+        height: 400px;
+        max-width: 800px;
+      }
+      
+      @media (max-width: 1200px) {
+        img {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar Navigation -->
+    <div id="sidebar">
+      <img src="images/ule-logo.png" alt="ULE Logo" class="logo" />
+
+      <h2>Table of Contents</h2>
+      <div class="theme-switch-wrapper">
+        <label class="theme-switch" style="margin-top: 10px; z-index: 1600">
+          <input type="checkbox" id="themeToggle" />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <ul>
+        <li><a href="#dashboard-overview">Dashboard Overview</a></li>
+        <li><a href="#navbar-options">Navbar Options</a></li>
+        <li><a href="#add-functionality">Add Functionality</a></li>
+        <li><a href="#search-functionality">Search Functionality</a></li>
+        <li><a href="#activity">Activity</a></li>
+        <li><a href="#notifications">Notifications</a></li>
+        <li><a href="#settings">Settings</a></li>
+        <li><a href="#sidebar-options">Sidebar Options</a></li>
+        <li>
+          <a href="#community-collection-overview"
+            >Community & Collection Overview</a
+          >
+        </li>
+        <li><a href="#buyer-statistics">Buyer Statistics</a></li>
+        <li><a href="#data-visualization">Data Visualization</a></li>
+        <li><a href="#recent-activity">Recent Activity</a></li>
+        <li><a href="#newly-added-libraries">Newly Added Libraries</a></li>
+        <li><a href="#plan-overview">Plan Overview</a></li>
+        <li><a href="#buyers-by-location">Buyers By Location</a></li>
+        <li><a href="#wizard-user-guide">Wizard User Guide</a></li>
+        <li><a href="#managing-listings">Managing Listings</a></li>
+        <li><a href="#communities-section">Communities Section</a></li>
+        <li><a href="#elevations-section">Elevations Section</a></li>
+        <li><a href="#options-section">Options Section</a></li>
+        <li><a href="#leads-section">Leads Section</a></li>
+        <li><a href="#user-management">User Management</a></li>
+        <li><a href="#billing-payment">Billing & Payment</a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div id="content">
+      <h1>Admin Side Documentation</h1>
+      <hr />
+
+      <div class="section" id="dashboard-overview">
+        <h2>Dashboard Overview</h2>
+        <p>
+          On our main dashboard, you will find a wealth of information. Below,
+          we present the features and actions available to you, organized step
+          by step for enhanced clarity.
+        </p>
+
+        <div id="navbar-options">
+          <h3>1. Navbar Options</h3>
+          <h4>Collapse Sidebar</h4>
+          <p>
+            A button with three horizontal lines allows you to collapse or
+            expand the sidebar, thereby improving your visibility of the
+            dashboard.
+          </p>
+
+          <div class="steps">
+            <p><strong>Steps to collapse sidebar:</strong></p>
+            <ol>
+              <li>Please click on the button with three lines.</li>
+              <div style="text-align: center">
+                <img
+                  src="images/dashboard 1.png"
+                  alt="Dashboard 1"
+                  class="img"
+                />
+              </div>
+              <li>
+                After clicking that button, you will notice that the sidebar has
+                collapsed.
+              </li>
+              <div style="text-align: center">
+                <img
+                  src="images/dashboard 2.png"
+                  alt="dashboard 2"
+                  class="img"
+                />
+              </div>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="add-functionality">
+        <h3>Add Functionality</h3>
+        <p>
+          A plus icon button allows you to add various items, including the
+          ability to add a community, collection, elevation, user role, and
+          user.
+        </p>
+
+        <div class="steps">
+          <h4>Steps to add functionality:</h4>
+          <ol>
+            <li>Begin by clicking on the + icon.</li>
+            <div style="text-align: center">
+              <img
+                src="images/add functionality 1.png"
+                alt="functionality 1"
+                class="img"
+              />
+            </div>
+            <li>
+              You can now observe the added functionality for various elements,
+              including community, collection, elevation, user roles, and the
+              ability to add users.
+            </li>
+            <div style="text-align: center">
+              <img
+                src="images/add functionality 2.png"
+                alt="functionality 2"
+                class="img"
+              />
+            </div>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section" id="search-functionality">
+        <h3>Search Functionality</h3>
+        <p>
+          A sidebar aids in searching design elements, enhancing user
+          experience.
+        </p>
+
+        <div class="steps">
+          <p>
+            <strong
+              >To implement the search functionality, follow these
+              steps:</strong
+            >
+          </p>
+          <ol>
+            <li>
+              To begin your search, simply click on the search box to enter your
+              query.
+            </li>
+            <div style="text-align: center">
+              <img
+                src="images/search functionality 1.png"
+                alt="search functionality 1"
+                class="img"
+              />
+            </div>
+            <li>Type your search query into the search box.</li>
+            <div style="text-align: center">
+              <img
+                src="images/search functionality 2.png"
+                alt="search functinality 2"
+                class="img"
+              />
+            </div>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section" id="activity">
+        <h3>Activity</h3>
+        <p>
+          This section is dedicated to Activity, enabling you to view all
+          activity related to your account.
+        </p>
+
+        <div class="steps">
+          <p><strong>Steps to check your activity log:</strong></p>
+          <ol>
+            <li>Click on the book icon to access your recent activity.</li>
+            <div style="text-align: center">
+              <img
+                src="images/recent activity 1.png"
+                alt="recent-activity 1"
+                class="img"
+              />
+            </div>
+            <li>You can now view your recent activity.</li>
+            <div style="text-align: center">
+              <img
+                src="images/recent activity 2.png"
+                alt="recent-activity 2"
+                class="img"
+              />
+            </div>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section" id="notifications">
+        <h3>Notifications</h3>
+        <p>
+          This section is dedicated to notifications, enabling you to view all
+          updates related to your account.
+        </p>
+
+        <div class="steps">
+          <p><strong>Steps to view notifications:</strong></p>
+          <ol>
+            <li>Click on the notification icon.</li>
+            <div style="text-align: center">
+              <img
+                src="images/notification 1.png"
+                alt="notification 1"
+                class="img"
+              />
+            </div>
+            <li>You can now view notifications.</li>
+            <div style="text-align: center">
+              <img
+                src="images/notification 2.png"
+                alt="notification 2"
+                class="img"
+              />
+            </div>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section" id="settings">
+        <h3>Settings</h3>
+        <p>
+          The settings button allows you to update your personal information and
+          subscription plan, as well as explore alternative plans.
+        </p>
+
+        <div class="steps">
+          <p><strong>Steps to update details:</strong></p>
+          <ol>
+            <li>
+              To access the user details, click on the settings button, which
+              will open the settings menu.
+            </li>
+            <div style="text-align: center">
+              <img src="images/setting 1.png" alt="setting 1" class="img" />
+            </div>
+            <li>You can update your information and save the changes here.</li>
+            <div style="text-align: center">
+              <img src="images/setting 2.png" alt="setting 2" class="img" />
+            </div>
+          </ol>
+        </div>
+
+        <h3>Logout Functionality:</h3>
+        <p>
+          In this section, you have the option to log out of the visualizer.
+        </p>
+        <div class="steps">
+          <p><strong>Follow these steps to successfully log out:</strong></p>
+          <ol>
+            <li>Click on the profile icon.</li>
+            <div style="text-align: center">
+              <img src="images/logout 1.png" alt="logout 1" class="img" />
+            </div>
+            <li>Click the logout button to sign out of your account.</li>
+            <div style="text-align: center">
+              <img src="images/logout 2.png" alt="Logout 2" class="img" />
+            </div>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section" id="sidebar-options">
+        <h3>Sidebar Options</h3>
+        <p>
+          I am including screenshots of the sidebar below to illustrate all the
+          available functionality options, such as the wizard, manage listing,
+          options, leads, user management, library, billing, and payments.
+        </p>
+        <div style="text-align: center">
+          <img src="images/sidebar 1.png" alt="sidebar 1" class="img" />
+        </div>
+      </div>
+
+      <div class="section" id="community-collection-overview">
+        <h3>Community and Collection Overview</h3>
+        <p>
+          Here, you can view the total number of communities associated with
+          your house, the number of collections, elevations, and available
+          options for your homes.
+        </p>
+        <div style="text-align: center">
+          <img
+            src="images/community 1.png"
+            alt="community 1"
+            style="width: 60%; height: 200px; max-width: 800px"
+          />
+        </div>
+      </div>
+
+      <div class="section" id="buyer-statistics">
+        <h3>Buyer Statistics</h3>
+        <p>
+          The dashboard displays the total number of buyers, including the count
+          of active and new buyers. This data is illustrated through a line bar
+          graph for easy comprehension.
+        </p>
+        <div style="text-align: center">
+          <img
+            src="images/buyer statics.png"
+            alt="buyer-statistics 1"
+            class="img"
+          />
+        </div>
+      </div>
+
+      <div class="section" id="data-visualization">
+        <h3>Data Visualization</h3>
+        <p>
+          The data concerning communities, collections, elevations, and options
+          is represented in a pie chart located beneath the buyers' locations.
+        </p>
+        <div style="text-align: center">
+          <img
+            src="images/data visualization.png"
+            alt="data-visualization 1"
+            class="img"
+          />
+        </div>
+      </div>
+
+      <div class="section" id="recent-activity">
+        <h3>Recent Activity</h3>
+        <p>
+          You can monitor recent activities performed by any user, such as
+          deleting a layer or executing other actions.
+        </p>
+        <div style="text-align: center">
+          <img
+            src="images/recent activity big.png"
+            alt="recent-activity 1"
+            class="img"
+          />
+        </div>
+      </div>
+
+      <div class="section" id="newly-added-libraries">
+        <h3>Newly Added Libraries</h3>
+        <p>Below this section, you will find the Newly Added Libraries.</p>
+        <div style="text-align: center">
+          <img
+            src="images/new added layer.png"
+            alt="new added layer 1"
+            class="img"
+          />
+        </div>
+      </div>
+
+      <div class="section" id="plan-overview">
+        <h3>Plan Overview</h3>
+        <p>
+          Stay informed about your monthly plan. You can view your plan in the
+          dashboard section.
+        </p>
+        <div style="text-align: center">
+          <img
+            src="images/plan overview.png"
+            alt="plan overview"
+            style="height: 200px; width: 60%; max-width: 800px"
+          />
+        </div>
+      </div>
+
+      <div class="section" id="buyers-by-location">
+        <h3>Buyers By Location</h3>
+        <p>
+          You can view buyers by location on Google Maps. The functionality
+          allows you to zoom in and out, providing a comprehensive view of
+          buyers from around the world.
+        </p>
+        <div style="text-align: center">
+          <img
+            src="images/buyer by location.png"
+            alt="buyer by location"
+            class="img"
+          />
+        </div>
+      </div>
+
+      <div class="section" id="wizard-user-guide">
+        <h2>Wizard</h2>
+        <p>
+          Wizard feature includes creating elevation, collection, community, and
+          updating the blueprint.
+        </p>
+
+        <div>
+          <h3>Access the Wizard Section</h3>
+          <p>
+            From the left-hand sidebar of the admin panel, click on the
+            <strong>"Wizard"</strong> menu option.
+          </p>
+          <p>
+            This will open the <strong>Wizard Dashboard</strong>, where you can
+            manage different components of the ULE 360 experience.
+          </p>
+        </div>
+
+        <div>
+          <h3>Create a New Option</h3>
+
+          <p>
+            On the <strong>"Create Options"</strong> page, click the
+            <strong>purple "+" button</strong> (highlighted in the image) to add
+            a new option.
+          </p>
+        </div>
+
+        <div>
+          <h3>Delete Created Options</h3>
+
+          <p>Click the delete icon to remove a single option.</p>
+        </div>
+
+        <div>
+          <h3>Edit Mode</h3>
+
+          <p>
+            Locate the <strong>"Edit Mode"</strong> switch on the top right of
+            the options panel and Click the switch to enable editing.
+          </p>
+        </div>
+
+        <div>
+          <h3>Import Existing Options</h3>
+
+          <p>
+            Instead of creating new options manually, you can quickly reuse
+            previously created ones using the Import Existing feature.
+          </p>
+
+          <p>
+            Locate the <strong>"Import Existing"</strong> button at the top
+            right.
+          </p>
+        </div>
+
+        <div class="steps">
+          <h4>Select Items to Import</h4>
+          <p>
+            After clicking on <strong>Import Existing</strong>, a page will open
+            with a list of reusable options.
+          </p>
+
+          <ol>
+            <li>
+              View Available Items:
+              <ul>
+                <li>
+                  A table is displayed showing titles and statuses of all
+                  previously created items (e.g., Brick, Door, Fascia).
+                </li>
+                <li>
+                  Each item is marked <strong>Active</strong>, indicating it's
+                  ready to be imported.
+                </li>
+              </ul>
+            </li>
+            <li>
+              Select the Items You Need:
+              <ul>
+                <li>
+                  Use the checkboxes on the left to select individual items.
+                </li>
+                <li>
+                  To select all items, click the <strong>"All"</strong> checkbox
+                  at the top.
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <div>
+            <p>
+              Click <strong>"Save Changes"</strong> for changes to be applied.
+            </p>
+          </div>
+
+          <div>
+            <p>In the Search bar we search the wizard by the title</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section" id="managing-listings">
+        <h2>Managing Listings</h2>
+
+        <div class="steps">
+          <ol>
+            <li>
+              Click on <strong>"Manage Listing"</strong> on the
+              left-handsidebar.
+            </li>
+
+            <li>Now click on the <strong>"Communities"</strong> button</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section" id="communities-section">
+        <h2>Communities Section</h2>
+
+        <p>In this feature you can manage community section</p>
+        <p>
+          The <strong>Community</strong> section displays individual community
+          cards showing the Community Name (e.g., "Arbor Spring," "Fairhope"),
+          along with edit options and an Active toggle to mark communities as
+          Active or Inactive. At the top right of the dashboard, action buttons
+          allow for Bulk Edit to modify multiple entries, Upload to import
+          details from external files, Undo to revert recent changes, and Delete
+          to remove selected entries.
+        </p>
+        <div class="steps">
+          <h4>Steps to manage communities:</h4>
+          <ol>
+            <li>Click on the "Upload" button</li>
+            <li>
+              Now, Upload the CSV file and click on the
+              <strong>"Continue"</strong> button.
+            </li>
+            <li>
+              Now Click on the <strong>"+ icon"</strong> on the top right corner
+              for adding the new community.
+            </li>
+            <li>
+              Fill all the required fields and then click on
+              <strong>"Add Community"</strong> button.
+            </li>
+            <li>
+              From here user can directly edit the collection and delete the
+              selected collection.
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="section" id="collection-section">
+        <h2>Collection Section</h2>
+        <p>
+          In this feature you can search for specific collection, edit, delete,
+          link collection with community.
+        </p>
+
+        <ul>
+          <li>Click on the "Collection" button highlighted with a red box.</li>
+          <li>
+            Click on "Link Collection to Community" if you want to link
+            collection.
+          </li>
+          <li>Click on the "Deleted" button for deleting the collection.</li>
+        </ul>
+
+        <h3>Collection Section</h3>
+        <p>
+          The "Elevations" option is designed for managing elevation designs or
+          property elevation collections. By clicking this option, users can
+          view the current listings of elevation assets, and likely perform
+          actions such as adding new elevations, editing existing designs, or
+          removing listings.
+        </p>
+
+        <ul>
+          <li>
+            Click on the "Elevations" button under Manage Listing to access
+            elevations.
+          </li>
+          <li>Click on "Blueprint" button to upload elevation blueprint.</li>
+          <li>
+            Upload your blueprint from your directory and click on "Upload
+            Blueprint" button.
+          </li>
+          <li>Click here to search specific elevation.</li>
+          <li>
+            From here you can view linked collection list and edit or delete
+            elevation.
+          </li>
+        </ul>
+      </div>
+
+      <div class="section" id="options-section">
+        <h2>Options</h2>
+        <p>
+          The purpose of this section is to provide detailed management tools
+          for various options. Users can toggle the Status to activate or
+          deactivate each option, and use the Edit or Delete buttons to make
+          necessary modifications.
+        </p>
+
+        <ul>
+          <li>Click on the "Options" button on the left sidebar.</li>
+          <li>
+            From here you can search for specific option, undo changes, delete
+            and create new option.
+          </li>
+          <li>Click on the + button to create a new option.</li>
+        </ul>
+
+        <h3>Add New Option</h3>
+        <ol>
+          <li>Fill in the Title field with the name of the option.</li>
+          <li>Select "Yes" or "No" to set its activation status.</li>
+          <li>Click Add Option to save the entry.</li>
+        </ol>
+      </div>
+
+      <div class="section" id="leads-section">
+        <h2>Leads</h2>
+        <p>
+          This section is used to manage leads. Here you can view details like
+          the Buyer's name, the associated Community, specific Collection and
+          Elevation details, and the current Status of the lead.
+        </p>
+
+        <ol>
+          <li>Click on "Leads" button on the left sidebar.</li>
+          <li>
+            Click on "Search" button to search for buyers using their ID number
+            or name.
+          </li>
+          <li>Select the desired entries via checkboxes.</li>
+          <li>Click "Change Status" to update their current status.</li>
+          <li>Select the status as desired.</li>
+          <li>Click "Save Changes".</li>
+        </ol>
+      </div>
+
+      <div class="section" id="user-management">
+        <h2>User Management</h2>
+        <p>
+          In this feature you can update status, add new entry, modify names,
+          descriptions, or statuses, manage permissions and also remove them
+          when necessary.
+        </p>
+
+        <h3>User Roles</h3>
+        <p>
+          In User Roles you can update the status of roles (active/inactive),
+          add new roles, modify role names, descriptions, or statuses, and
+          update role permissions.
+        </p>
+
+        <ul>
+          <li>
+            Click on "User Roles" under "User Management" on the left sidebar to
+            access the User Roles.
+          </li>
+        </ul>
+
+        <h4>Add New Role</h4>
+        <ol>
+          <li>Click on the "+" Icon on the top right corner.</li>
+          <li>
+            Enter the details of the role, including the name, description, and
+            status (active or inactive).
+          </li>
+          <li>Click on the submit button.</li>
+        </ol>
+
+        <h4>Modify Any Role</h4>
+        <ol>
+          <li>Click on the edit icon in front of the role you want to edit.</li>
+          <li>Update the details you want to change.</li>
+          <li>Click on the submit button.</li>
+        </ol>
+
+        <h4>Update Role Permissions</h4>
+        <ol>
+          <li>Click on the three horizontal dots below the action column.</li>
+          <li>
+            Update the values to "Yes" or "No" from the dropdown to specify
+            whether the user can or cannot access that feature.
+          </li>
+        </ol>
+
+        <h3>User Management</h3>
+        <p>
+          <a
+            href="https://drive.google.com/drive/folders/1o6b0F2Nxd77bnCgldzQaj2J6KtDrZsAm?usp=drive_link"
+            >Reference Link</a
+          >
+        </p>
+
+        <h4>Add New User</h4>
+        <ol>
+          <li>Click on the "+" Icon</li>
+          <li>
+            Enter the details of the User, including the name, email, password,
+            mobile number, role and status (active or inactive).
+          </li>
+          <li>Click on the Create User button.</li>
+        </ol>
+
+        <h4>Modify Any User</h4>
+        <ol>
+          <li>Click on the edit icon in front of the user you want to edit.</li>
+          <li>Update the details you want to change.</li>
+          <li>Click on the submit button.</li>
+        </ol>
+
+        <h4>Delete Any User</h4>
+        <p>Click on the delete icon in front of the user you want to delete.</p>
+      </div>
+
+      <div class="section" id="billing-payment">
+        <h2>Billing and Payment</h2>
+        <p>
+          In this section, you can view your billing details and subscription
+          information.
+        </p>
+        <p>
+          Additionally, you can resend your invoice by clicking the button
+          Re-send Invoice.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // Theme toggle functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const toggleButton = document.getElementById("themeToggle");
+        const html = document.documentElement;
+
+        // Check for saved user preference, if any, on load of the website
+        const savedTheme = localStorage.getItem("theme") || "light";
+        html.setAttribute("data-theme", savedTheme);
+        toggleButton.checked = savedTheme === "dark";
+
+        // Toggle theme when switch is clicked
+        toggleButton.addEventListener("change", function () {
+          const newTheme = this.checked ? "dark" : "light";
+          html.setAttribute("data-theme", newTheme);
+          localStorage.setItem("theme", newTheme);
+        });
+      });
+
+      // Mobile menu toggle
+      document
+        .getElementById("mobile-menu-btn")
+        .addEventListener("click", function () {
+          document.getElementById("sidebar").classList.toggle("open");
+        });
+        
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+
+          // Update active state in sidebar
+          document.querySelectorAll("#sidebar li").forEach((item) => {
+            item.classList.remove("active");
+          });
+          this.parentElement.classList.add("active");
+        });
+      });
+
+      // Highlight current section in sidebar
+      window.addEventListener("scroll", function () {
+        const sections = document.querySelectorAll(".section");
+        let currentSection = "";
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (pageYOffset >= sectionTop - 300) {
+            currentSection = section.getAttribute("id");
+          }
+        });
+
+        document.querySelectorAll("#sidebar li").forEach((item) => {
+          item.classList.remove("active");
+          if (
+            item.querySelector("a").getAttribute("href") ===
+            "#" + currentSection
+          ) {
+            item.classList.add("active");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
