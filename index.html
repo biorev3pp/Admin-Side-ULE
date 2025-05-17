@@ -185,7 +185,7 @@
 
       h2 {
         color: var(--text-color);
-        margin: 25px 0 15px;
+        margin: 35px 0 15px;
         font-size: 24px;
         padding-bottom: 8px;
         border-bottom: 1px solid var(--link-hover);
@@ -310,7 +310,7 @@
         </label>
       </div>
       <ul>
-        <li><a href="#dashboard-overview">Dashboard Overview</a></li>
+        <!-- <li><a href="#dashboard-overview">Dashboard Overview</a></li>
         <li><a href="#navbar-options">Navbar Options</a></li>
         <li><a href="#add-functionality">Add Functionality</a></li>
         <li><a href="#search-functionality">Search Functionality</a></li>
@@ -328,11 +328,13 @@
         <li><a href="#recent-activity">Recent Activity</a></li>
         <li><a href="#newly-added-libraries">Newly Added Libraries</a></li>
         <li><a href="#plan-overview">Plan Overview</a></li>
-        <li><a href="#buyers-by-location">Buyers By Location</a></li>
+        <li><a href="#buyers-by-location">Buyers By Location</a></li> -->
         <li><a href="#wizard-user-guide">Wizard User Guide</a></li>
         <li><a href="#managing-listings">Managing Listings</a></li>
-        <li><a href="#communities-section">Communities Section</a></li>
-        <li><a href="#elevations-section">Elevations Section</a></li>
+      
+        <li style="padding-left: 40px; margin: -5px ;"><a href="#communities-section">Communities Section</a></li>
+        <li style="padding-left: 40px; margin: -5px ;"><a href="#collection-section">Collection Section</a></li>
+        <li style="padding-left: 40px; margin: -5px ;"><a href="#elevations-section">Elevations Section</a></li>
         <li><a href="#options-section">Options Section</a></li>
         <li><a href="#leads-section">Leads Section</a></li>
         <li><a href="#user-management">User Management</a></li>
@@ -342,348 +344,19 @@
 
     <!-- Main Content -->
     <div id="content">
-      <h1>Admin Side Documentation</h1>
+      <h1 style="
+      position: fixed;
+      top: 0;
+      padding: 25px 0px;
+      margin-top: 0px;
+      z-index: 100;
+      width: 100%;
+      background-color: var(--bg-color);">Admin Side Documentation</h1>
       <hr />
 
-      <div class="section" id="dashboard-overview">
-        <h2>Dashboard Overview</h2>
-        <p>
-          On our main dashboard, you will find a wealth of information. Below,
-          we present the features and actions available to you, organized step
-          by step for enhanced clarity.
-        </p>
-
-        <div id="navbar-options">
-          <h3>1. Navbar Options</h3>
-          <h4>Collapse Sidebar</h4>
-          <p>
-            A button with three horizontal lines allows you to collapse or
-            expand the sidebar, thereby improving your visibility of the
-            dashboard.
-          </p>
-
-          <div class="steps">
-            <p><strong>Steps to collapse sidebar:</strong></p>
-            <ol>
-              <li>Please click on the button with three lines.</li>
-              <div style="text-align: center">
-                <img
-                  src="images/dashboard 1.png"
-                  alt="Dashboard 1"
-                  class="img"
-                />
-              </div>
-              <li>
-                After clicking that button, you will notice that the sidebar has
-                collapsed.
-              </li>
-              <div style="text-align: center">
-                <img
-                  src="images/dashboard 2.png"
-                  alt="dashboard 2"
-                  class="img"
-                />
-              </div>
-            </ol>
-          </div>
-        </div>
-      </div>
-
-      <div class="section" id="add-functionality">
-        <h3>Add Functionality</h3>
-        <p>
-          A plus icon button allows you to add various items, including the
-          ability to add a community, collection, elevation, user role, and
-          user.
-        </p>
-
-        <div class="steps">
-          <h4>Steps to add functionality:</h4>
-          <ol>
-            <li>Begin by clicking on the + icon.</li>
-            <div style="text-align: center">
-              <img
-                src="images/add functionality 1.png"
-                alt="functionality 1"
-                class="img"
-              />
-            </div>
-            <li>
-              You can now observe the added functionality for various elements,
-              including community, collection, elevation, user roles, and the
-              ability to add users.
-            </li>
-            <div style="text-align: center">
-              <img
-                src="images/add functionality 2.png"
-                alt="functionality 2"
-                class="img"
-              />
-            </div>
-          </ol>
-        </div>
-      </div>
-
-      <div class="section" id="search-functionality">
-        <h3>Search Functionality</h3>
-        <p>
-          A sidebar aids in searching design elements, enhancing user
-          experience.
-        </p>
-
-        <div class="steps">
-          <p>
-            <strong
-              >To implement the search functionality, follow these
-              steps:</strong
-            >
-          </p>
-          <ol>
-            <li>
-              To begin your search, simply click on the search box to enter your
-              query.
-            </li>
-            <div style="text-align: center">
-              <img
-                src="images/search functionality 1.png"
-                alt="search functionality 1"
-                class="img"
-              />
-            </div>
-            <li>Type your search query into the search box.</li>
-            <div style="text-align: center">
-              <img
-                src="images/search functionality 2.png"
-                alt="search functinality 2"
-                class="img"
-              />
-            </div>
-          </ol>
-        </div>
-      </div>
-
-      <div class="section" id="activity">
-        <h3>Activity</h3>
-        <p>
-          This section is dedicated to Activity, enabling you to view all
-          activity related to your account.
-        </p>
-
-        <div class="steps">
-          <p><strong>Steps to check your activity log:</strong></p>
-          <ol>
-            <li>Click on the book icon to access your recent activity.</li>
-            <div style="text-align: center">
-              <img
-                src="images/recent activity 1.png"
-                alt="recent-activity 1"
-                class="img"
-              />
-            </div>
-            <li>You can now view your recent activity.</li>
-            <div style="text-align: center">
-              <img
-                src="images/recent activity 2.png"
-                alt="recent-activity 2"
-                class="img"
-              />
-            </div>
-          </ol>
-        </div>
-      </div>
-
-      <div class="section" id="notifications">
-        <h3>Notifications</h3>
-        <p>
-          This section is dedicated to notifications, enabling you to view all
-          updates related to your account.
-        </p>
-
-        <div class="steps">
-          <p><strong>Steps to view notifications:</strong></p>
-          <ol>
-            <li>Click on the notification icon.</li>
-            <div style="text-align: center">
-              <img
-                src="images/notification 1.png"
-                alt="notification 1"
-                class="img"
-              />
-            </div>
-            <li>You can now view notifications.</li>
-            <div style="text-align: center">
-              <img
-                src="images/notification 2.png"
-                alt="notification 2"
-                class="img"
-              />
-            </div>
-          </ol>
-        </div>
-      </div>
-
-      <div class="section" id="settings">
-        <h3>Settings</h3>
-        <p>
-          The settings button allows you to update your personal information and
-          subscription plan, as well as explore alternative plans.
-        </p>
-
-        <div class="steps">
-          <p><strong>Steps to update details:</strong></p>
-          <ol>
-            <li>
-              To access the user details, click on the settings button, which
-              will open the settings menu.
-            </li>
-            <div style="text-align: center">
-              <img src="images/setting 1.png" alt="setting 1" class="img" />
-            </div>
-            <li>You can update your information and save the changes here.</li>
-            <div style="text-align: center">
-              <img src="images/setting 2.png" alt="setting 2" class="img" />
-            </div>
-          </ol>
-        </div>
-
-        <h3>Logout Functionality:</h3>
-        <p>
-          In this section, you have the option to log out of the visualizer.
-        </p>
-        <div class="steps">
-          <p><strong>Follow these steps to successfully log out:</strong></p>
-          <ol>
-            <li>Click on the profile icon.</li>
-            <div style="text-align: center">
-              <img src="images/logout 1.png" alt="logout 1" class="img" />
-            </div>
-            <li>Click the logout button to sign out of your account.</li>
-            <div style="text-align: center">
-              <img src="images/logout 2.png" alt="Logout 2" class="img" />
-            </div>
-          </ol>
-        </div>
-      </div>
-
-      <div class="section" id="sidebar-options">
-        <h3>Sidebar Options</h3>
-        <p>
-          I am including screenshots of the sidebar below to illustrate all the
-          available functionality options, such as the wizard, manage listing,
-          options, leads, user management, library, billing, and payments.
-        </p>
-        <div style="text-align: center">
-          <img src="images/sidebar 1.png" alt="sidebar 1" class="img" />
-        </div>
-      </div>
-
-      <div class="section" id="community-collection-overview">
-        <h3>Community and Collection Overview</h3>
-        <p>
-          Here, you can view the total number of communities associated with
-          your house, the number of collections, elevations, and available
-          options for your homes.
-        </p>
-        <div style="text-align: center">
-          <img
-            src="images/community 1.png"
-            alt="community 1"
-            style="width: 60%; height: 200px; max-width: 800px"
-          />
-        </div>
-      </div>
-
-      <div class="section" id="buyer-statistics">
-        <h3>Buyer Statistics</h3>
-        <p>
-          The dashboard displays the total number of buyers, including the count
-          of active and new buyers. This data is illustrated through a line bar
-          graph for easy comprehension.
-        </p>
-        <div style="text-align: center">
-          <img
-            src="images/buyer statics.png"
-            alt="buyer-statistics 1"
-            class="img"
-          />
-        </div>
-      </div>
-
-      <div class="section" id="data-visualization">
-        <h3>Data Visualization</h3>
-        <p>
-          The data concerning communities, collections, elevations, and options
-          is represented in a pie chart located beneath the buyers' locations.
-        </p>
-        <div style="text-align: center">
-          <img
-            src="images/data visualization.png"
-            alt="data-visualization 1"
-            class="img"
-          />
-        </div>
-      </div>
-
-      <div class="section" id="recent-activity">
-        <h3>Recent Activity</h3>
-        <p>
-          You can monitor recent activities performed by any user, such as
-          deleting a layer or executing other actions.
-        </p>
-        <div style="text-align: center">
-          <img
-            src="images/recent activity big.png"
-            alt="recent-activity 1"
-            class="img"
-          />
-        </div>
-      </div>
-
-      <div class="section" id="newly-added-libraries">
-        <h3>Newly Added Libraries</h3>
-        <p>Below this section, you will find the Newly Added Libraries.</p>
-        <div style="text-align: center">
-          <img
-            src="images/new added layer.png"
-            alt="new added layer 1"
-            class="img"
-          />
-        </div>
-      </div>
-
-      <div class="section" id="plan-overview">
-        <h3>Plan Overview</h3>
-        <p>
-          Stay informed about your monthly plan. You can view your plan in the
-          dashboard section.
-        </p>
-        <div style="text-align: center">
-          <img
-            src="images/plan overview.png"
-            alt="plan overview"
-            style="height: 200px; width: 60%; max-width: 800px"
-          />
-        </div>
-      </div>
-
-      <div class="section" id="buyers-by-location">
-        <h3>Buyers By Location</h3>
-        <p>
-          You can view buyers by location on Google Maps. The functionality
-          allows you to zoom in and out, providing a comprehensive view of
-          buyers from around the world.
-        </p>
-        <div style="text-align: center">
-          <img
-            src="images/buyer by location.png"
-            alt="buyer by location"
-            class="img"
-          />
-        </div>
-      </div>
-
-      <div class="section" id="wizard-user-guide">
-        <h2>Wizard</h2>
+     
+      <div class="section" id="wizard-user-guide" style="margin-top: 5px;">
+        <h2 >Wizard</h2>
         <p>
           Wizard feature includes creating elevation, collection, community, and
           updating the blueprint.
@@ -976,7 +649,7 @@
         </div>
         </ul></div>
         
-
+<div class="section" id="elevations-section">
         <h3>Elevation Section</h3>
         <p>
           The "Elevations" option is designed for managing elevation designs or
@@ -1036,6 +709,7 @@
         </div>
         </ul></div>
         
+      </div>
       </div>
 
   <div class="section" id="options-section">
@@ -1541,6 +1215,7 @@
           }
         });
       });
+      
     </script>
   </body>
 </html>
