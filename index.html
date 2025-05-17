@@ -1149,73 +1149,91 @@
       </div>
     </div>
 
-    <script>
-      // Theme toggle functionality
-      document.addEventListener("DOMContentLoaded", function () {
-        const toggleButton = document.getElementById("themeToggle");
-        const html = document.documentElement;
+  <script>
+  // Theme toggle functionality
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggleButton = document.getElementById("themeToggle");
+    const html = document.documentElement;
 
-        // Check for saved user preference, if any, on load of the website
-        const savedTheme = localStorage.getItem("theme") || "light";
-        html.setAttribute("data-theme", savedTheme);
-        toggleButton.checked = savedTheme === "dark";
+    // Check for saved user preference, if any, on load of the website
+    const savedTheme = localStorage.getItem("theme") || "light";
+    html.setAttribute("data-theme", savedTheme);
+    toggleButton.checked = savedTheme === "dark";
 
-        // Toggle theme when switch is clicked
-        toggleButton.addEventListener("change", function () {
-          const newTheme = this.checked ? "dark" : "light";
-          html.setAttribute("data-theme", newTheme);
-          localStorage.setItem("theme", newTheme);
-        });
-      });
+    // Toggle theme when switch is clicked
+    toggleButton.addEventListener("change", function () {
+      const newTheme = this.checked ? "dark" : "light";
+      html.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+    });
 
-      // Mobile menu toggle
-      document
-        .getElementById("mobile-menu-btn")
-        .addEventListener("click", function () {
-          document.getElementById("sidebar").classList.toggle("open");
-        });
+    // Improved smooth scrolling for anchor links
+    document.querySelectorAll('#sidebar a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
         
-      // Smooth scrolling for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-
-          document.querySelector(this.getAttribute("href")).scrollIntoView({
-            behavior: "smooth",
-          });
-
-          // Update active state in sidebar
-          document.querySelectorAll("#sidebar li").forEach((item) => {
-            item.classList.remove("active");
-          });
-          this.parentElement.classList.add("active");
-        });
-      });
-
-      // Highlight current section in sidebar
-      window.addEventListener("scroll", function () {
-        const sections = document.querySelectorAll(".section");
-        let currentSection = "";
-
-        sections.forEach((section) => {
-          const sectionTop = section.offsetTop;
-          const sectionHeight = section.clientHeight;
-          if (pageYOffset >= sectionTop - 300) {
-            currentSection = section.getAttribute("id");
-          }
-        });
-
+        // Remove all active classes first
         document.querySelectorAll("#sidebar li").forEach((item) => {
           item.classList.remove("active");
-          if (
-            item.querySelector("a").getAttribute("href") ===
-            "#" + currentSection
-          ) {
-            item.classList.add("active");
-          }
         });
+        
+        // Add active class to clicked item's parent li
+        this.parentElement.classList.add("active");
+
+        // Scroll to the section
+        const targetId = this.getAttribute("href");
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 100, // Adjust for fixed header
+            behavior: "smooth"
+          });
+        }
+      });
+    });
+
+    // Improved scroll spy functionality
+    function updateActiveSection() {
+      const sections = document.querySelectorAll(".section");
+      const scrollPosition = window.scrollY + 150; // Adjust for better detection
+      
+      // Remove all active classes first
+      document.querySelectorAll("#sidebar li").forEach((item) => {
+        item.classList.remove("active");
       });
       
-    </script>
+      // Find the current section
+      let currentSection = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          currentSection = section.getAttribute("id");
+        }
+      });
+      
+      // Add active class to corresponding sidebar item
+      if (currentSection) {
+        const correspondingLink = document.querySelector(`#sidebar a[href="#${currentSection}"]`);
+        if (correspondingLink) {
+          correspondingLink.parentElement.classList.add("active");
+        }
+      }
+    }
+
+    // Run on initial load
+    updateActiveSection();
+    
+    // Run on scroll
+    window.addEventListener("scroll", function() {
+      updateActiveSection();
+    });
+
+    // Also update when clicking sidebar links (in case of small sections)
+    window.addEventListener("hashchange", function() {
+      setTimeout(updateActiveSection, 100);
+    });
+  });
+</script>
   </body>
 </html>
