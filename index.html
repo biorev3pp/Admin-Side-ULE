@@ -6,14 +6,12 @@
       href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
       rel="stylesheet"
     />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="images/ule 360 logo.png" />
-
     <title>Admin Side Documentation</title>
 
     <style>
-    /* 1. Theme variables */
+    /* Enhanced Theme Variables */
     :root {
       --font-family: 'Roboto', Arial, sans-serif;
       --bg-color: #ffffff;
@@ -22,27 +20,37 @@
       --sidebar-text: #ecf0f1;
       --sidebar-hover: #34495e;
       --sidebar-active: #3498db;
-      --link-color: #333;
-      --link-hover: #ddd;
-      --active-link-bg: #2c3e50;
-      --active-link-color: white;
-      --step-bg: #f9f9f9;
+      --link-color: #3498db;
+      --link-hover: #2980b9;
+      --active-link-bg: rgba(52, 152, 219, 0.2);
+      --active-link-color: #3498db;
+      --step-bg: #f8fafc;
       --step-border: #3498db;
       --header-height: 80px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    /* Enhanced Theme Switch */
     .theme-switch-wrapper {
       position: fixed;
       top: 20px;
       right: 20px;
       z-index: 1100;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .theme-switch-label {
+      color: var(--sidebar-text);
+      font-size: 0.9rem;
     }
 
     .theme-switch {
       position: relative;
       display: inline-block;
-      width: 60px;
-      height: 34px;
+      width: 64px;
+      height: 36px;
     }
 
     .theme-switch input {
@@ -61,24 +69,24 @@
       background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
       transition: var(--transition);
       border-radius: 36px;
-      box-shadow: var(--card-shadow);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
     .slider:before {
-       position: absolute;
+      position: absolute;
       content: "☀️";
       height: 28px;
       width: 28px;
-      left: 2px;
-      bottom: 3px;
+      left: 4px;
+      bottom: 4px;
       background-color: white;
       transition: var(--transition);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 23px;
-      box-shadow: var(--card-shadow);
+      font-size: 14px;
+      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
     }
 
     /* Checked state (Dark Mode) */
@@ -87,25 +95,32 @@
     }
 
     input:checked + .slider:before {
-     transform: translateX(28px);
+      transform: translateX(28px);
       content: "🌙";
     }
 
+    /* Dark Mode Variables */
     [data-theme="dark"] {
       --bg-color: #121212;
       --text-color: #ffffff;
       --sidebar-bg: #1e1e1e;
-      --sidebar-text: #cccccc;
+      --sidebar-text: #e0e0e0;
       --sidebar-hover: #333;
       --sidebar-active: #3498db;
-      --link-color: #cccccc;
-      --link-hover: #333;
-      --active-link-bg: #3498db;
-      --active-link-color: #fff;
+      --link-color: #63b3ed;
+      --link-hover: #90cdf4;
+      --active-link-bg: rgba(52, 152, 219, 0.3);
+      --active-link-color: #63b3ed;
       --step-bg: #1f1f1f;
-      --step-border: #3498db;
+      --step-border: #63b3ed;
     }
 
+    /* Smooth transitions for theme change */
+    body {
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Rest of your existing CSS remains the same */
     html {
       scroll-behavior: smooth;
       scroll-padding-top: var(--header-height);
@@ -133,7 +148,7 @@
       padding: 20px 0;
       box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
       z-index: 1000;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, background-color 0.3s ease;
     }
 
     #sidebar h2 {
@@ -168,8 +183,12 @@
     }
 
     #sidebar li.active {
-      background-color: var(--sidebar-hover);
+      background-color: var(--active-link-bg);
       border-left: 4px solid var(--sidebar-active);
+    }
+
+    #sidebar li.active a {
+      color: var(--active-link-color);
     }
 
     #mobile-menu-btn {
@@ -191,7 +210,7 @@
       margin-left: 250px;
       padding: 20px;
       flex: 1;
-      transition: margin-left 0.3s ease;
+      transition: margin-left 0.3s ease, background-color 0.3s ease;
     }
 
     section {
@@ -200,6 +219,7 @@
       background-color: var(--bg-color);
       border-radius: 5px;
       scroll-margin-top: var(--header-height);
+      transition: background-color 0.3s ease;
     }
 
     h1 {
@@ -211,30 +231,31 @@
       width: calc(100% - 250px);
       background-color: var(--bg-color);
       z-index: 100;
-      
       height: var(--header-height);
       display: flex;
       align-items: center;
+      transition: background-color 0.3s ease;
     }
 
     h2 {
       font-size: 1.5rem;
       margin-top: 4px;
-      
       color: var(--text-color);
       margin-bottom: 10px;
-        border-bottom: 5px solid #2c3e50;
+      border-bottom: 5px solid #2c3e50;
     }
 
     h3 {
       font-size: 1.2rem;
       margin-top: 2px;
       margin-bottom: 1px;
+      color: var(--text-color);
     }
 
     p, li {
       font-size: 1rem;
       margin-bottom: 5px;
+      color: var(--text-color);
     }
 
     .image-placeholder,
@@ -253,6 +274,7 @@
       border-radius: 4px;
       border-left: 3px solid var(--step-border);
       color: var(--text-color);
+      transition: background-color 0.3s ease;
     }
     
     .logo {
@@ -264,11 +286,8 @@
 
     img, video {
       max-width: 100%;
-      
-      
       margin: 15px auto;
       border-radius: 4px;
-    
     }
 
     video {
@@ -278,7 +297,8 @@
     hr {
       border: 0;
       height: 1px;
-      background-color: #ddd;
+      background-color: var(--text-color);
+      opacity: 0.1;
       margin: 3px 0;
     }
 
@@ -341,7 +361,6 @@
 
       section {
         padding: 15px;
-       
       }
 
       .theme-switch-wrapper {
@@ -359,7 +378,6 @@
       h2 {
         font-size: 1.3rem;
         margin-top: 20px;
-        
       }
       
       h3 {
@@ -379,36 +397,35 @@
         height: 28px;
       }
       
-     .slider:before {
-        height: 24px;
-        width: 24px;
+      .slider:before {
+        height: 20px;
+        width: 20px;
         font-size: 12px;
       }
       
       input:checked + .slider:before {
-        transform: translateX(24px);
+        transform: translateX(22px);
       }
     }
   </style>
   </head>
   <body>
     <!-- Sidebar Navigation -->
-     <button id="mobile-menu-btn" aria-label="Toggle menu">☰</button>
+    <button id="mobile-menu-btn" aria-label="Toggle menu">☰</button>
     <div id="sidebar">
       <img src="images/ule-logo-white.png" alt="ULE Logo" class="logo" />
 
       <h2>Table of Contents</h2>
       <div class="theme-switch-wrapper">
-        <label class="theme-switch" style="margin-top: 10px; z-index: 1600">
+       
+        <label class="theme-switch">
           <input type="checkbox" id="themeToggle" />
           <span class="slider"></span>
         </label>
       </div>
       <ul>
-       
         <li><a href="#wizard-user-guide">Wizard User Guide</a></li>
         <li><a href="#managing-listings">Managing Listings</a></li>
-      
         <li style="padding-left: 40px; margin: -5px ;"><a href="#communities-section">Communities Section</a></li>
         <li style="padding-left: 40px; margin: -5px ;"><a href="#collection-section">Collection Section</a></li>
         <li style="padding-left: 40px; margin: -5px ;"><a href="#elevations-section">Elevations Section</a></li>
@@ -420,7 +437,7 @@
         <li style="padding-left: 40px; margin: -5px ;"><a href="#global-imports">Global Imports</a></li>
         <li><a href="#billing-payment">Billing & Payment</a></li>
       </ul>
-    </div>
+    </div>>
 
     <!-- Main Content -->
     <div id="main-content">
@@ -1625,6 +1642,10 @@
     <div style="text-align: center">
       <img src="images/lib18.png" alt="Import Button" class="img">
     </div>
+    <p>Step 2: A confirmation popup will appear. Click “Yes, Import it!” to confirm.</p>
+    <div style="text-align: center">
+      <img src="images/lib19.png" alt="Import Button" class="img">
+    </div>
   </div>
 
 </div>
@@ -1663,96 +1684,119 @@
     </div>
 
    <script>
-    // Mobile menu toggle
-    document.getElementById('mobile-menu-btn').addEventListener('click', function () {
-      document.getElementById('sidebar').classList.toggle('open');
-    });
+      // Enhanced Theme Toggle with Smooth Transitions
+      document.addEventListener('DOMContentLoaded', function() {
+        const toggleButton = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        
+        // Apply saved theme
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'dark') {
+          toggleButton.checked = true;
+        }
 
-    // Smooth scrolling and active link highlighting
-    document.addEventListener('DOMContentLoaded', function () {
-      const navLinks = document.querySelectorAll('#sidebar a');
-      const sidebar = document.getElementById('sidebar');
+        // Add transition class to all elements that need smooth theme changes
+        function addThemeTransitions() {
+          const elements = [
+            document.body,
+            document.getElementById('sidebar'),
+            document.getElementById('main-content'),
+            document.querySelector('h1'),
+            ...document.querySelectorAll('section, .section, .steps')
+          ];
+          
+          elements.forEach(el => {
+            if (el) {
+              el.style.transition = 'background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease';
+            }
+          });
+        }
 
-      // Function to set active link
-      function setActiveLink() {
-        const scrollPosition = window.scrollY + 100;
+        toggleButton.addEventListener('change', function() {
+          const html = document.documentElement;
+          const currentTheme = html.getAttribute('data-theme') || 'light';
+          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+          
+          // Add transitions before changing theme
+          addThemeTransitions();
+          
+          // Change theme
+          html.setAttribute('data-theme', newTheme);
+          localStorage.setItem('theme', newTheme);
+          
+          // Remove transition after a short delay to avoid affecting other animations
+          setTimeout(() => {
+            const elements = document.querySelectorAll('body, #sidebar, #main-content, h1, section, .section, .steps');
+            elements.forEach(el => {
+              if (el) {
+                el.style.transition = '';
+              }
+            });
+          }, 300);
+        });
+
+        // Mobile menu toggle (unchanged)
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+          document.getElementById('sidebar').classList.toggle('open');
+        });
+
+        // Smooth scrolling and active link highlighting (unchanged)
+        const navLinks = document.querySelectorAll('#sidebar a');
+        const sidebar = document.getElementById('sidebar');
+
+        function setActiveLink() {
+          const scrollPosition = window.scrollY + 100;
+
+          navLinks.forEach(link => {
+            const section = document.querySelector(link.getAttribute('href'));
+            if (section) {
+              const sectionTop = section.offsetTop;
+              const sectionHeight = section.offsetHeight;
+              
+              if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                link.parentElement.classList.add('active');
+              } else {
+                link.parentElement.classList.remove('active');
+              }
+            }
+          });
+        }
+
+        window.addEventListener('scroll', setActiveLink);
 
         navLinks.forEach(link => {
-          const section = document.querySelector(link.getAttribute('href'));
-          if (section) {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-              link.parentElement.classList.add('active');
-            } else {
-              link.parentElement.classList.remove('active');
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            if (window.innerWidth <= 768) {
+              sidebar.classList.remove('open');
+            }
+
+            navLinks.forEach(lnk => lnk.parentElement.classList.remove('active'));
+            this.parentElement.classList.add('active');
+
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+              window.scrollTo({
+                top: targetSection.offsetTop - 80,
+                behavior: 'smooth'
+              });
+            }
+          });
+        });
+
+        setActiveLink();
+        
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(e) {
+          if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
+            if (!sidebar.contains(e.target) && e.target.id !== 'mobile-menu-btn') {
+              sidebar.classList.remove('open');
             }
           }
         });
-      }
-
-      // Set active link on scroll
-      window.addEventListener('scroll', setActiveLink);
-
-      // Set active link on click
-      navLinks.forEach(link => {
-        link.addEventListener('click', function (e) {
-          e.preventDefault();
-
-          // Close mobile menu if open
-          if (window.innerWidth <= 768) {
-            sidebar.classList.remove('open');
-          }
-
-          // Remove active class from all links
-          navLinks.forEach(lnk => lnk.parentElement.classList.remove('active'));
-
-          // Add active class to clicked link
-          this.parentElement.classList.add('active');
-
-          // Smooth scroll to section
-          const targetId = this.getAttribute('href');
-          const targetSection = document.querySelector(targetId);
-          if (targetSection) {
-            window.scrollTo({
-              top: targetSection.offsetTop - 80,
-              behavior: 'smooth'
-            });
-          }
-        });
       });
-
-      // Set initial active link
-      setActiveLink();
-      
-      // Theme toggle functionality
-      const toggleButton = document.getElementById('themeToggle');
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      
-      // Apply saved theme
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      if (savedTheme === 'dark') {
-        toggleButton.checked = true;
-      }
-
-      toggleButton.addEventListener('change', () => {
-        const html = document.documentElement;
-        const current = html.getAttribute('data-theme') || 'light';
-        const next = current === 'dark' ? 'light' : 'dark';
-        html.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-      });
-
-      // Close sidebar when clicking outside on mobile
-      document.addEventListener('click', function(e) {
-        if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
-          if (!sidebar.contains(e.target) && e.target.id !== 'mobile-menu-btn') {
-            sidebar.classList.remove('open');
-          }
-        }
-      });
-    });
-  </script>
+    </script>
   </body>
 </html>
