@@ -7,7 +7,7 @@
       rel="stylesheet"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="images/ule 360 logo.png" />
+    <link rel="icon" type="image/png" href="images/ule logo new.png.png" />
     <title>Admin Side Documentation</title>
 
     <style>
@@ -167,7 +167,7 @@
     #sidebar li {
       padding: 10px 20px;
       border-left: 4px solid transparent;
-      transition: all 0.3s;
+      transition: all 0.3s, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     #sidebar li a {
@@ -180,6 +180,12 @@
     #sidebar li:hover {
       background-color: var(--sidebar-hover);
       border-left: 4px solid var(--sidebar-active);
+      transform: scale(0.95);
+      z-index: 2;
+    }
+
+    #sidebar li:active {
+      transform: scale(0.92);
     }
 
     #sidebar li.active {
